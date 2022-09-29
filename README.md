@@ -31,3 +31,10 @@ want to play. I am a huge fan of pokemon myself, and think that
 creating something I'm both passionate about and knowledge on 
 how to make can make this project fun for me!
 
+### User Stories
+* As a user, I want to be able to add pokemon to
+  my party.
+* As a user, I want to be able to choose which moves to use.
+* As a user, I want to be able to switch my pokemon if needed.
+* As a user, I want to see what my moves do.
+* As a user, I want to see the pokemon I am using and am against.
