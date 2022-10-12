@@ -20,6 +20,8 @@ public class TypeChartTest {
     Pokemon Dragapult;
     Pokemon Aerodactyl;
     Pokemon Primarina;
+    String[] coverageType1 = {"Poison", "Bug"};
+    String[] coverageType2 = {"Ice", "null"};
 
 
     @BeforeEach
@@ -49,6 +51,8 @@ public class TypeChartTest {
         assertEquals(0, TypeChart.typeChart("Normal", Dragapult.getType()));
         assertEquals(0.5, TypeChart.typeChart("Normal", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Normal", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Normal", coverageType2));
     }
 
     @Test
@@ -62,6 +66,8 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Electric", Dragapult.getType()));
         assertEquals(2, TypeChart.typeChart("Electric", Aerodactyl.getType()));
         assertEquals(2, TypeChart.typeChart("Electric", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Electric", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Electric", coverageType2));
     }
 
     @Test
@@ -75,6 +81,8 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Water", Dragapult.getType()));
         assertEquals(2, TypeChart.typeChart("Water", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Water", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Water", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Water", coverageType2));
     }
 
     @Test
@@ -88,6 +96,8 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Fire", Dragapult.getType()));
         assertEquals(0.5, TypeChart.typeChart("Fire", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Fire", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Fire", coverageType1));
+        assertEquals(2, TypeChart.typeChart("Fire", coverageType2));
     }
 
     @Test
@@ -101,6 +111,8 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Grass", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Grass", Aerodactyl.getType()));
         assertEquals(2, TypeChart.typeChart("Grass", Primarina.getType()));
+        assertEquals(0.25, TypeChart.typeChart("Grass", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Grass", coverageType2));
     }
 
     @Test
@@ -114,6 +126,8 @@ public class TypeChartTest {
         assertEquals(1, TypeChart.typeChart("Ground", Dragapult.getType()));
         assertEquals(0, TypeChart.typeChart("Ground", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Ground", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Ground", coverageType2));
     }
 
     @Test
@@ -127,6 +141,8 @@ public class TypeChartTest {
         assertEquals(1, TypeChart.typeChart("Rock", Dragapult.getType()));
         assertEquals(2, TypeChart.typeChart("Rock", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Rock", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Rock", coverageType1));
+        assertEquals(2, TypeChart.typeChart("Rock", coverageType2));
     }
 
     @Test
@@ -135,11 +151,13 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Flying", Pangoro.getType()));
         assertEquals(0.5, TypeChart.typeChart("Flying", Zapdos.getType()));
         assertEquals(1, TypeChart.typeChart("Flying", Swampert.getType()));
-        assertEquals(1, TypeChart.typeChart("Flyinh", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Kartana.getType()));
         assertEquals(1, TypeChart.typeChart("Flying", Blissey.getType()));
         assertEquals(1, TypeChart.typeChart("Flying", Dragapult.getType()));
         assertEquals(0.5, TypeChart.typeChart("Flying", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Flying", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Flying", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Flying", coverageType2));
     }
 
     @Test
@@ -153,6 +171,8 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Dragon", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Dragon", Aerodactyl.getType()));
         assertEquals(0, TypeChart.typeChart("Dragon", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Dragon", coverageType2));
     }
 
     @Test
@@ -166,6 +186,8 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Fairy", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Fairy", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Fairy", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fairy", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Fairy", coverageType2));
     }
 
     @Test
@@ -179,6 +201,8 @@ public class TypeChartTest {
         assertEquals(1, TypeChart.typeChart("Steel", Dragapult.getType()));
         assertEquals(2, TypeChart.typeChart("Steel", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Steel", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Steel", coverageType1));
+        assertEquals(2, TypeChart.typeChart("Steel", coverageType2));
     }
 
     @Test
@@ -192,6 +216,8 @@ public class TypeChartTest {
         assertEquals(1, TypeChart.typeChart("Psychic", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Psychic", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Psychic", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Psychic", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Psychic", coverageType2));
     }
 
     @Test
@@ -205,6 +231,8 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Dark", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Dark", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Dark", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Dark", coverageType2));
     }
 
     @Test
@@ -218,6 +246,8 @@ public class TypeChartTest {
         assertEquals(0, TypeChart.typeChart("Fighting", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Fighting", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Fighting", Primarina.getType()));
+        assertEquals(0.25, TypeChart.typeChart("Fighting", coverageType1));
+        assertEquals(2, TypeChart.typeChart("Fighting", coverageType2));
     }
 
     @Test
@@ -231,6 +261,8 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Ice", Dragapult.getType()));
         assertEquals(2, TypeChart.typeChart("Ice", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Ice", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Ice", coverageType1));
+        assertEquals(0.5, TypeChart.typeChart("Ice", coverageType2));
     }
 
     @Test
@@ -244,6 +276,8 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Bug", Dragapult.getType()));
         assertEquals(0.5, TypeChart.typeChart("Bug", Aerodactyl.getType()));
         assertEquals(0.5, TypeChart.typeChart("Bug", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Bug", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Bug", coverageType2));
     }
 
     @Test
@@ -257,6 +291,8 @@ public class TypeChartTest {
         assertEquals(2, TypeChart.typeChart("Ghost", Dragapult.getType()));
         assertEquals(1, TypeChart.typeChart("Ghost", Aerodactyl.getType()));
         assertEquals(1, TypeChart.typeChart("Ghost", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Ghost", coverageType2));
     }
 
     @Test
@@ -270,5 +306,7 @@ public class TypeChartTest {
         assertEquals(0.5, TypeChart.typeChart("Poison", Dragapult.getType()));
         assertEquals(0.5, TypeChart.typeChart("Poison", Aerodactyl.getType()));
         assertEquals(2, TypeChart.typeChart("Poison", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Poison", coverageType1));
+        assertEquals(1, TypeChart.typeChart("Poison", coverageType2));
     }
 }
