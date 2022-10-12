@@ -3,11 +3,14 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.SQLOutput;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypeChartTest {
+    TypeChart tc;
+    String[] dummyMoves = {"Normal", "null"};
+    double multiplier;
     Pokemon Victini;
     Pokemon Pangoro;
     Pokemon Zapdos;
@@ -21,6 +24,8 @@ public class TypeChartTest {
 
     @BeforeEach
     void runBefore() {
+        tc = new TypeChart();
+        multiplier = tc.typeChart("Normal", dummyMoves);
         Victini = new Pokemon("Victini"); Victini.setupPokemon();
         Pangoro = new Pokemon("Pangoro"); Pangoro.setupPokemon();
         Zapdos = new Pokemon("Zapdos"); Zapdos.setupPokemon();
@@ -35,235 +40,235 @@ public class TypeChartTest {
 
     @Test
     void normalMove() {
-        assertEquals(1, TypeChart.TypeChart("Normal", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Normal", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Normal", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Normal", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Normal", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Normal", Blissey.getType()));
-        assertEquals(0, TypeChart.TypeChart("Normal", Dragapult.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Normal", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Normal", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Normal", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Blissey.getType()));
+        assertEquals(0, TypeChart.typeChart("Normal", Dragapult.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Normal", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Normal", Primarina.getType()));
     }
 
     @Test
     void electricMove() {
-        assertEquals(1, TypeChart.TypeChart("Electric", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Electric", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Electric", Zapdos.getType()));
-        assertEquals(0, TypeChart.TypeChart("Electric", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Electric", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Electric", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Electric", Dragapult.getType()));
-        assertEquals(2, TypeChart.TypeChart("Electric", Aerodactyl.getType()));
-        assertEquals(2, TypeChart.TypeChart("Electric", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Electric", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Electric", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Electric", Zapdos.getType()));
+        assertEquals(0, TypeChart.typeChart("Electric", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Electric", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Electric", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Electric", Dragapult.getType()));
+        assertEquals(2, TypeChart.typeChart("Electric", Aerodactyl.getType()));
+        assertEquals(2, TypeChart.typeChart("Electric", Primarina.getType()));
     }
 
     @Test
     void waterMove() {
-        assertEquals(2, TypeChart.TypeChart("Water", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Water", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Water", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Water", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Water", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Water", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Water", Dragapult.getType()));
-        assertEquals(2, TypeChart.TypeChart("Water", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Water", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Water", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Water", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Water", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Water", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Water", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Water", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Water", Dragapult.getType()));
+        assertEquals(2, TypeChart.typeChart("Water", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Water", Primarina.getType()));
     }
 
     @Test
     void fireMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Fire", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fire", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fire", Zapdos.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fire", Swampert.getType()));
-        assertEquals(4, TypeChart.TypeChart("Fire", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fire", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fire", Dragapult.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fire", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fire", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fire", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Fire", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Fire", Zapdos.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fire", Swampert.getType()));
+        assertEquals(4, TypeChart.typeChart("Fire", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Fire", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fire", Dragapult.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fire", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fire", Primarina.getType()));
     }
 
     @Test
     void grassMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Grass", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Grass", Pangoro.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Grass", Zapdos.getType()));
-        assertEquals(4, TypeChart.TypeChart("Grass", Swampert.getType()));
-        assertEquals(0.25, TypeChart.TypeChart("Grass", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Grass", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Grass", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Grass", Aerodactyl.getType()));
-        assertEquals(2, TypeChart.TypeChart("Grass", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Grass", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Grass", Pangoro.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Grass", Zapdos.getType()));
+        assertEquals(4, TypeChart.typeChart("Grass", Swampert.getType()));
+        assertEquals(0.25, TypeChart.typeChart("Grass", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Grass", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Grass", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Grass", Aerodactyl.getType()));
+        assertEquals(2, TypeChart.typeChart("Grass", Primarina.getType()));
     }
 
     @Test
     void groundMove() {
-        assertEquals(2, TypeChart.TypeChart("Ground", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Pangoro.getType()));
-        assertEquals(0, TypeChart.TypeChart("Ground", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Blissey.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Dragapult.getType()));
-        assertEquals(0, TypeChart.TypeChart("Ground", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ground", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Ground", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Pangoro.getType()));
+        assertEquals(0, TypeChart.typeChart("Ground", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Blissey.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Dragapult.getType()));
+        assertEquals(0, TypeChart.typeChart("Ground", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Ground", Primarina.getType()));
     }
 
     @Test
     void rockMove() {
-        assertEquals(2, TypeChart.TypeChart("Rock", Victini.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Rock", Pangoro.getType()));
-        assertEquals(2, TypeChart.TypeChart("Rock", Zapdos.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Rock", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Rock", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Rock", Blissey.getType()));
-        assertEquals(1, TypeChart.TypeChart("Rock", Dragapult.getType()));
-        assertEquals(2, TypeChart.TypeChart("Rock", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Rock", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Rock", Victini.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Rock", Pangoro.getType()));
+        assertEquals(2, TypeChart.typeChart("Rock", Zapdos.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Rock", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Rock", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Rock", Blissey.getType()));
+        assertEquals(1, TypeChart.typeChart("Rock", Dragapult.getType()));
+        assertEquals(2, TypeChart.typeChart("Rock", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Rock", Primarina.getType()));
     }
 
     @Test
     void flyingMove() {
-        assertEquals(1, TypeChart.TypeChart("Flying", Victini.getType()));
-        assertEquals(2, TypeChart.TypeChart("Flying", Pangoro.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Flying", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Flying", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Flyinh", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Flying", Blissey.getType()));
-        assertEquals(1, TypeChart.TypeChart("Flying", Dragapult.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Flying", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Flying", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Victini.getType()));
+        assertEquals(2, TypeChart.typeChart("Flying", Pangoro.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Flying", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Flyinh", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Blissey.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Dragapult.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Flying", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Flying", Primarina.getType()));
     }
 
     @Test
     void dragonMove() {
-        assertEquals(1, TypeChart.TypeChart("Dragon", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dragon", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dragon", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dragon", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Dragon", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dragon", Blissey.getType()));
-        assertEquals(2, TypeChart.TypeChart("Dragon", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dragon", Aerodactyl.getType()));
-        assertEquals(0, TypeChart.TypeChart("Dragon", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Dragon", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Blissey.getType()));
+        assertEquals(2, TypeChart.typeChart("Dragon", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Dragon", Aerodactyl.getType()));
+        assertEquals(0, TypeChart.typeChart("Dragon", Primarina.getType()));
     }
 
     @Test
     void fairyMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Fairy", Victini.getType()));
-        assertEquals(4, TypeChart.TypeChart("Fairy", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fairy", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fairy", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fairy", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fairy", Blissey.getType()));
-        assertEquals(2, TypeChart.TypeChart("Fairy", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fairy", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fairy", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fairy", Victini.getType()));
+        assertEquals(4, TypeChart.typeChart("Fairy", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Fairy", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Fairy", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fairy", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Fairy", Blissey.getType()));
+        assertEquals(2, TypeChart.typeChart("Fairy", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Fairy", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Fairy", Primarina.getType()));
     }
 
     @Test
     void steelMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Steel", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Steel", Pangoro.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Steel", Zapdos.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Steel", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Steel", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Steel", Blissey.getType()));
-        assertEquals(1, TypeChart.TypeChart("Steel", Dragapult.getType()));
-        assertEquals(2, TypeChart.TypeChart("Steel", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Steel", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Steel", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Steel", Pangoro.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Steel", Zapdos.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Steel", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Steel", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Steel", Blissey.getType()));
+        assertEquals(1, TypeChart.typeChart("Steel", Dragapult.getType()));
+        assertEquals(2, TypeChart.typeChart("Steel", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Steel", Primarina.getType()));
     }
 
     @Test
     void psychicMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Psychic", Victini.getType()));
-        assertEquals(0, TypeChart.TypeChart("Psychic", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Swampert.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Psychic", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Blissey.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Psychic", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Psychic", Victini.getType()));
+        assertEquals(0, TypeChart.typeChart("Psychic", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Swampert.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Psychic", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Blissey.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Psychic", Primarina.getType()));
     }
 
     @Test
     void darkMove() {
-        assertEquals(2, TypeChart.TypeChart("Dark", Victini.getType()));
-        assertEquals(0.25, TypeChart.TypeChart("Dark", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dark", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dark", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dark", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dark", Blissey.getType()));
-        assertEquals(2, TypeChart.TypeChart("Dark", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Dark", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Dark", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Dark", Victini.getType()));
+        assertEquals(0.25, TypeChart.typeChart("Dark", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", Blissey.getType()));
+        assertEquals(2, TypeChart.typeChart("Dark", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Dark", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Dark", Primarina.getType()));
     }
 
     @Test
     void fightingMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Fighting", Victini.getType()));
-        assertEquals(2, TypeChart.TypeChart("Fighting", Pangoro.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fighting", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fighting", Swampert.getType()));
-        assertEquals(2, TypeChart.TypeChart("Fighting", Kartana.getType()));
-        assertEquals(2, TypeChart.TypeChart("Fighting", Blissey.getType()));
-        assertEquals(0, TypeChart.TypeChart("Fighting", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Fighting", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Fighting", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fighting", Victini.getType()));
+        assertEquals(2, TypeChart.typeChart("Fighting", Pangoro.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fighting", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Fighting", Swampert.getType()));
+        assertEquals(2, TypeChart.typeChart("Fighting", Kartana.getType()));
+        assertEquals(2, TypeChart.typeChart("Fighting", Blissey.getType()));
+        assertEquals(0, TypeChart.typeChart("Fighting", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Fighting", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Fighting", Primarina.getType()));
     }
 
     @Test
     void iceMove() {
-        assertEquals(0.5, TypeChart.TypeChart("Ice", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ice", Pangoro.getType()));
-        assertEquals(2, TypeChart.TypeChart("Ice", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ice", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ice", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ice", Blissey.getType()));
-        assertEquals(2, TypeChart.TypeChart("Ice", Dragapult.getType()));
-        assertEquals(2, TypeChart.TypeChart("Ice", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Ice", Primarina.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Ice", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Ice", Pangoro.getType()));
+        assertEquals(2, TypeChart.typeChart("Ice", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Ice", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Ice", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Ice", Blissey.getType()));
+        assertEquals(2, TypeChart.typeChart("Ice", Dragapult.getType()));
+        assertEquals(2, TypeChart.typeChart("Ice", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Ice", Primarina.getType()));
     }
 
     @Test
     void bugMove() {
-        assertEquals(1, TypeChart.TypeChart("Bug", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Bug", Pangoro.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Bug", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Bug", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Bug", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Bug", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Bug", Dragapult.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Bug", Aerodactyl.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Bug", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Bug", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Bug", Pangoro.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Bug", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Bug", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Bug", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Bug", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Bug", Dragapult.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Bug", Aerodactyl.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Bug", Primarina.getType()));
     }
 
     @Test
     void ghostMove() {
-        assertEquals(2, TypeChart.TypeChart("Ghost", Victini.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Ghost", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ghost", Zapdos.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ghost", Swampert.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ghost", Kartana.getType()));
-        assertEquals(0, TypeChart.TypeChart("Ghost", Blissey.getType()));
-        assertEquals(2, TypeChart.TypeChart("Ghost", Dragapult.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ghost", Aerodactyl.getType()));
-        assertEquals(1, TypeChart.TypeChart("Ghost", Primarina.getType()));
+        assertEquals(2, TypeChart.typeChart("Ghost", Victini.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Ghost", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", Zapdos.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", Swampert.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", Kartana.getType()));
+        assertEquals(0, TypeChart.typeChart("Ghost", Blissey.getType()));
+        assertEquals(2, TypeChart.typeChart("Ghost", Dragapult.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", Aerodactyl.getType()));
+        assertEquals(1, TypeChart.typeChart("Ghost", Primarina.getType()));
     }
 
     @Test
     void poisonMove() {
-        assertEquals(1, TypeChart.TypeChart("Poison", Victini.getType()));
-        assertEquals(1, TypeChart.TypeChart("Poison", Pangoro.getType()));
-        assertEquals(1, TypeChart.TypeChart("Poison", Zapdos.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Poison", Swampert.getType()));
-        assertEquals(0, TypeChart.TypeChart("Poison", Kartana.getType()));
-        assertEquals(1, TypeChart.TypeChart("Poison", Blissey.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Poison", Dragapult.getType()));
-        assertEquals(0.5, TypeChart.TypeChart("Poison", Aerodactyl.getType()));
-        assertEquals(2, TypeChart.TypeChart("Poison", Primarina.getType()));
+        assertEquals(1, TypeChart.typeChart("Poison", Victini.getType()));
+        assertEquals(1, TypeChart.typeChart("Poison", Pangoro.getType()));
+        assertEquals(1, TypeChart.typeChart("Poison", Zapdos.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Poison", Swampert.getType()));
+        assertEquals(0, TypeChart.typeChart("Poison", Kartana.getType()));
+        assertEquals(1, TypeChart.typeChart("Poison", Blissey.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Poison", Dragapult.getType()));
+        assertEquals(0.5, TypeChart.typeChart("Poison", Aerodactyl.getType()));
+        assertEquals(2, TypeChart.typeChart("Poison", Primarina.getType()));
     }
 }

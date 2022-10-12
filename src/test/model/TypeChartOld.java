@@ -1,6 +1,6 @@
 package model;
 
-public class TypeChart {
+public class TypeChartOld {
     //Variables
     //Type of Move       - Static        NOT DONE
     //Type of Receiver   - Static        NOT DONE

@@ -40,9 +40,9 @@ public class Pokemon {
     public void setupPokemon() {                                   //Since we have a finite amount of pokemon, we can
         if (this.pokemonName.equals("Victini")) {                  //create a method to give each of the 9 pokemon their
             giveVictiniStats();                                    //respective stats, moves, and types
-        } else if (this.pokemonName.equals("Pangoro")) {           //I have tried a switch case here and it does not
-            givePangoroStats();                                    //Seem to work when using it the same way as
-        } else if (this.pokemonName.equals("Zapdos")) {            //the TypeChart switch method
+        } else if (this.pokemonName.equals("Pangoro")) {
+            givePangoroStats();
+        } else if (this.pokemonName.equals("Zapdos")) {
             giveZapdosStats();
         } else if (this.pokemonName.equals("Kartana")) {
             giveKartanaStats();
@@ -54,10 +54,10 @@ public class Pokemon {
             giveBlisseyStats();
         } else if (this.pokemonName.equals("Aerodactyl")) {
             giveAerodactylStats();
-        } else if (this.pokemonName.equals("Primarina")) {
-            givePrimarinaStats();
-        }
-
+        } else {                                                   //Primarina is the only option here as we have
+            givePrimarinaStats();                                  //REQUIRED only valid pokemon in an above method
+        }                                                          //Also git code coverage wants this to be else
+                                                                   //Instead of else if
     }
 
     //MODIFIES: THIS
