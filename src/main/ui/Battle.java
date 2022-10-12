@@ -16,9 +16,9 @@ public class Battle {
 
     Random rand = new Random();
     Scanner userinput = new Scanner(System.in);
-    private Pokemon activePokemon;
-    private Pokemon opponentActivePokemon;
-    public static final int PARTY_NUMBER = 3; //We want 3 Pokemon Max
+    private Pokemon activePokemon;                                    //Creates the pokemon that will be actice
+    private Pokemon opponentActivePokemon;                            //Creates opponents active pokemon
+    public static final int PARTY_NUMBER = 3;                         //We want 3 Pokemon Max
     private Pokemon[] listOfPokemon = new Pokemon[PARTY_NUMBER];      //Creates the party
     private Pokemon[] enemyPokemon = new Pokemon[PARTY_NUMBER];       //Creates enemy team party
     private final String[] acceptablePokemon = new String[]{          //Creates list of 9 acceptable pokemon we want
@@ -47,8 +47,8 @@ public class Battle {
         addPokemon();
         makeEnemyTeam();
         System.out.println("Press any key and return when you are ready to start!");
-        String dummy = userinput.next();
-        startBattle();
+        String dummy = userinput.next();                                        //Forces user to enter input to continue
+        startBattle();                                                          //Starts the battle
     }
 
     //MODIFIES: This
@@ -72,6 +72,8 @@ public class Battle {
         }
     }
 
+    //MODIFIES: THIS
+    //EFFECTS: Returns a String of an acceptable pokemon name
     private String verifyPokemon() {
         boolean check = true;
         String pokemonName = "";
@@ -124,7 +126,7 @@ public class Battle {
         }
         System.out.println("\n");
         System.out.println("Please choose your starting pokemon by their corresponding number.");
-
+                                             //Everything up to here is just console printing to make the UI look pretty
 
 
     }

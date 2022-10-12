@@ -28,19 +28,21 @@ public class Pokemon {
     private String move2;
     private String move3;
     private String move4;
-    private String[] pokemonType = new String[2];
+    private String[] pokemonType = new String[2];                  //Lists every possible attribute the pokemon needs
 
-
+    //REQUIRES: A valid pokemon name
     public Pokemon(String name) {
         this.pokemonName = name;
-    }
+    }       //Constructs the pokemon
 
-    public void setupPokemon() {
-        if (this.pokemonName.equals("Victini")) {
-            giveVictiniStats();
-        } else if (this.pokemonName.equals("Pangoro")) {
-            givePangoroStats();
-        } else if (this.pokemonName.equals("Zapdos")) {
+
+    //EFFECTS: Redirects the code to give stats to the proper pokemon
+    public void setupPokemon() {                                   //Since we have a finite amount of pokemon, we can
+        if (this.pokemonName.equals("Victini")) {                  //create a method to give each of the 9 pokemon their
+            giveVictiniStats();                                    //respective stats, moves, and types
+        } else if (this.pokemonName.equals("Pangoro")) {           //I have tried a switch case here and it does not
+            givePangoroStats();                                    //Seem to work when using it the same way as
+        } else if (this.pokemonName.equals("Zapdos")) {            //the TypeChart switch method
             giveZapdosStats();
         } else if (this.pokemonName.equals("Kartana")) {
             giveKartanaStats();
@@ -58,8 +60,10 @@ public class Pokemon {
 
     }
 
-    private void giveVictiniStats() {
-        this.pokemonHP = 341;
+    //MODIFIES: THIS
+    //This applies to all 9 give_____Stats methods
+    private void giveVictiniStats() {                         //The next couple of paragraphs are dedicated to attribute
+        this.pokemonHP = 341;                                 //initializing
         this.pokemonAttack = 236;
         this.pokemonDefense = 236;
         this.pokemonSpecialAttack = 236;
@@ -194,10 +198,12 @@ public class Pokemon {
     }
 
 
+    //EFFECTS: gives the pokemons name
     public String getName() {
         return pokemonName;
     }
 
+    //EFFECTS: gives the pokemons attributes
     public String getFacts() {
         String facts = "Name: " + this.pokemonName + "\n"
                      + "HP: "  + this.pokemonHP   + "\n"
@@ -211,8 +217,9 @@ public class Pokemon {
         return facts;
     }
 
-    public String[] getType() {
-        return this.pokemonType;
-    }
-
+    //EFFECTS: gives the pokemons type
+    public String[] getType() {                                 //While name is used to print name, and facts are used
+        return this.pokemonType;                                //To verify the stats are correct, this is used to
+    }                                                           //Figure out the type effectiveness, as well as STAB
+                                                                //Which will be explained in the Moves class
 }

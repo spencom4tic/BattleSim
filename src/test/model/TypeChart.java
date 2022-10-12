@@ -31,14 +31,17 @@ public class TypeChart {
 
     private static final int MAX_TYPING = 2;
 
+    //REQUIRES: A valid move, and a list of valid move types
     public static double TypeChart(String moveType, String[] pokemonType) {
         return findWeakness(moveType, pokemonType);
     }
 
-
+    //EFFECTS: returns a type effectiveness multiplier
+    //REQUIRES: Since the constructer requires the valid moveType and pokemonType: I'm going to assume these methods
+    //          dont need requirements
     private static double findWeakness(String moveType, String[] pokemonType) {
-        double multiplier = 1;
-        switch (moveType) {
+        double multiplier = 1;                                             //When given a move type, this will tell us
+        switch (moveType) {                                                //How much we need to multiply the damage by
             case "Normal": multiplier = multiplier * normalMove(pokemonType); break;
             case "Electric": multiplier = multiplier * electricMove(pokemonType); break;
             case "Water": multiplier = multiplier * waterMove(pokemonType); break;
@@ -61,7 +64,8 @@ public class TypeChart {
         return multiplier;
     }
 
-    private static double normalMove(String[] pokemonType) {
+    //EFFECTS: returns the multiplier when a normal move is dealing damage
+    private static double normalMove(String[] pokemonType) {                      //Explanation in electricMOVE
         double multiplier = 1;
         for (int x = 0; x < MAX_TYPING; x++) {
             if (pokemonType[x].equals("Rock")
@@ -70,16 +74,16 @@ public class TypeChart {
         }
         return multiplier;
     }
-
+    //EFFECTS: same thing but electric
     private static double electricMove(String[] pokemonType) {
         double multiplier = 1;
-        for (int x = 0; x < MAX_TYPING; x++) {
-            if (pokemonType[x].equals("Water")
-                    || pokemonType[x].equals("Flying")) {multiplier = multiplier * 2;}
+        for (int x = 0; x < MAX_TYPING; x++) {                       //Since lots of pokemon have 2 types,
+            if (pokemonType[x].equals("Water")                       // we need to make sure both are considered
+                    || pokemonType[x].equals("Flying")) {multiplier = multiplier * 2;} //Super effective moves
             else if (pokemonType[x].equals("Electric")
                   || pokemonType[x].equals("Grass")
-                  || pokemonType[x].equals("Dragon")) {multiplier = multiplier * 0.5;}
-            else if (pokemonType[x].equals("Ground")) {multiplier = multiplier * 0;}
+                  || pokemonType[x].equals("Dragon")) {multiplier = multiplier * 0.5;} //Not effective moves
+            else if (pokemonType[x].equals("Ground")) {multiplier = multiplier * 0;}   //Does not effect moves
         }
         return multiplier;
     }
