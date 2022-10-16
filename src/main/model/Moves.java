@@ -73,7 +73,7 @@ public class Moves {
             setupAerodactyl();
         } else {
             setupPrimarina();
-        }
+        } //test
     }
 
     private void setupVictini() {
