@@ -71,7 +71,7 @@ public class Moves {
             setupDragapult();
         } else if (this.pokemonName == "Aerodactyl") {
             setupAerodactyl();
-        } else if (this.pokemonName == "Primarina") {
+        } else {
             setupPrimarina();
         }
     }
