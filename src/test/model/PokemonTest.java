@@ -47,31 +47,35 @@ class PokemonTest {
 
     @Test
     void getFactsVictiniTest() {
-        String facts = "Name: " + "Victini" + "\n"
-                + "HP: "  + 341   + "\n"
-                + "Attack: " + 236 + "\n"
-                + "Defense: " + 236 + "\n"
-                + "Special Attack: " + 236 + "\n"
-                + "Special Defense: " + 236 + "\n"
-                + "Speed: " + 236 + "\n"
-                + "Type: " + "Fire" + ", " + "Psychic" + "\n"
-                + "Moves: " + "Blue Flare"+ ", " + "Psychic" + ", " + "Bolt Strike"+ ", " + "Energy Ball";
-
-        assertEquals(facts, Victini.getFacts());
+        String facts = "Name: " + "Victini" + "\n" + "HP: "  + 341   + "\n"
+                + "Attack: " + 236 + "\n" + "Defense: " + 236 + "\n"
+                + "Special Attack: " + 236 + "\n" + "Special Defense: " + 236 + "\n"
+                + "Speed: " + 236 + "\n" + "Type: " + "Fire" + ", " + "Psychic" + "\n"
+                + "Moves: " + "Blue Flare"+ ", " + "Zen Headbutt" + ", " + "Bolt Strike"+ ", " + "Energy Ball";
+        assertEquals(facts, Victini.getFacts());                                      //This test method checks
+        Victini.setPokemonCurrentHP(Victini.getPokemonHP());                          //Everything that the pokemon
+        assertEquals(341, Victini.getPokemonHP());                            //Class has to offer, and is done
+        assertEquals(341, Victini.getPokemonCurrentHP());                     //Through the getFacts() test,
+        assertEquals(236, Victini.getPokemonAttack());                        //The rest of these tests are just
+        assertEquals(236, Victini.getPokemonDefense());                       //For code coverage, and for the
+        assertEquals(236, Victini.getPokemonSpecialAttack());                 //Purpose of time, im just using
+        assertEquals(236, Victini.getPokemonSpecialDefense());                //Victini complete the coverage
+        assertEquals(236, Victini.getPokemonSpeed());
+        assertEquals("Blue Flare", Victini.getPokemonMoves().getMoveName(0));
+        Victini.setPokemonCurrentAttack(Victini.getPokemonAttack());
+        Victini.setPokemonCurrentSpecialAttack(Victini.getPokemonSpecialAttack());
+        Victini.setPokemonCurrentSpecialDefense(Victini.getPokemonSpecialDefense());
+        assertEquals(236, Victini.getPokemonCurrentAttack(), Victini.getPokemonCurrentSpecialAttack());
+        assertEquals(236, Victini.getPokemonCurrentSpecialDefense());
     }
 
     @Test
     void getFactsPangoroTest() {
-        String facts = "Name: " + "Pangoro" + "\n"
-                + "HP: "  + 331   + "\n"
-                + "Attack: " + 284 + "\n"
-                + "Defense: " + 192 + "\n"
-                + "Special Attack: " + 174 + "\n"
-                + "Special Defense: " + 178 + "\n"
-                + "Speed: " + 152 + "\n"
-                + "Type: " + "Fighting" + ", " + "Dark" + "\n"
+        String facts = "Name: " + "Pangoro" + "\n" + "HP: "  + 331   + "\n"
+                + "Attack: " + 284 + "\n"  + "Defense: " + 192 + "\n"
+                + "Special Attack: " + 174 + "\n" + "Special Defense: " + 178 + "\n"
+                + "Speed: " + 152 + "\n" + "Type: " + "Fighting" + ", " + "Dark" + "\n"
                 + "Moves: " + "Close Combat"+ ", " + "Darkest Lariat" + ", " + "Thunder Punch"+ ", " + "Swords Dance";
-
         assertEquals(facts, Pangoro.getFacts());
     }
 
@@ -86,7 +90,6 @@ class PokemonTest {
                 + "Speed: " + 236 + "\n"
                 + "Type: " + "Electric" + ", " + "Flying" + "\n"
                 + "Moves: " + "Thunderbolt"+ ", " + "Hurricane" + ", " + "Heat Wave"+ ", " + "Roost";
-
         assertEquals(facts, Zapdos.getFacts());
     }
 

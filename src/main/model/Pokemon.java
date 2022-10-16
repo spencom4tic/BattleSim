@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,16 @@ public class Pokemon {
 
     private String pokemonName;
     private int pokemonHP;
+    private int pokemonCurrentHP;
     private int pokemonAttack;
+    private int pokemonCurrentAttack;
     private int pokemonDefense;
     private int pokemonSpecialAttack;
+    private int pokemonCurrentSpecialAttack;
     private int pokemonSpecialDefense;
+    private int pokemonCurrentSpecialDefense;
     private int pokemonSpeed;
-    private String move1;
-    private String move2;
-    private String move3;
-    private String move4;
+    private Moves pokemonMoves;
     private String[] pokemonType = new String[2];                  //Lists every possible attribute the pokemon needs
 
     //REQUIRES: A valid pokemon name
@@ -63,138 +65,113 @@ public class Pokemon {
     //MODIFIES: THIS
     //This applies to all 9 give_____Stats methods
     private void giveVictiniStats() {                         //The next couple of paragraphs are dedicated to attribute
-        this.pokemonHP = 341;                                 //initializing
-        this.pokemonAttack = 236;
+        this.pokemonHP = this.pokemonCurrentHP = 341;         //initializing
+        this.pokemonAttack = this.pokemonCurrentAttack = 236;
         this.pokemonDefense = 236;
-        this.pokemonSpecialAttack = 236;
-        this.pokemonSpecialDefense = 236;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 236;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 236;
         this.pokemonSpeed = 236;
         this.pokemonType[0] = "Fire";
         this.pokemonType[1] = "Psychic";
-        this.move1 = "Blue Flare";
-        this.move2 = "Psychic";
-        this.move3 = "Bolt Strike";
-        this.move4 = "Energy Ball";
+        this.pokemonMoves = new Moves("Victini");
+
+
     }
 
     private void givePangoroStats() {
-        this.pokemonHP = 331;
-        this.pokemonAttack = 284;
+        this.pokemonHP = this.pokemonCurrentHP = 331;
+        this.pokemonAttack = this.pokemonCurrentAttack = 284;
         this.pokemonDefense = 192;
-        this.pokemonSpecialAttack = 174;
-        this.pokemonSpecialDefense = 178;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack =  174;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 178;
         this.pokemonSpeed = 152;
         this.pokemonType[0] = "Fighting";
         this.pokemonType[1] = "Dark";
-        this.move1 = "Close Combat";
-        this.move2 = "Darkest Lariat";
-        this.move3 = "Thunder Punch";
-        this.move4 = "Swords Dance";
+        this.pokemonMoves = new Moves("Pangoro");
     }
 
     private void giveZapdosStats() {
-        this.pokemonHP = 321;
-        this.pokemonAttack = 216;
+        this.pokemonHP = this.pokemonCurrentHP = 321;
+        this.pokemonAttack = this.pokemonCurrentAttack = 216;
         this.pokemonDefense = 206;
-        this.pokemonSpecialAttack = 286;
-        this.pokemonSpecialDefense = 216;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 286;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 216;
         this.pokemonSpeed = 236;
         this.pokemonType[0] = "Electric";
         this.pokemonType[1] = "Flying";
-        this.move1 = "Thunderbolt";
-        this.move2 = "Hurricane";
-        this.move3 = "Heat Wave";
-        this.move4 = "Roost";
+        this.pokemonMoves = new Moves("Zapdos");
     }
 
     private void giveSwampertStats() {
-        this.pokemonHP = 341;
-        this.pokemonAttack = 256;
+        this.pokemonHP = this.pokemonCurrentHP = 341;
+        this.pokemonAttack = this.pokemonCurrentAttack = 256;
         this.pokemonDefense = 216;
-        this.pokemonSpecialAttack = 206;
-        this.pokemonSpecialDefense = 216;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 206;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 216;
         this.pokemonSpeed = 156;
         this.pokemonType[0] = "Water";
         this.pokemonType[1] = "Ground";
-        this.move1 = "Liquidation";
-        this.move2 = "Earthquake";
-        this.move3 = "Stone Edge";
-        this.move4 = "Ice Punch";
+        this.pokemonMoves = new Moves("Swampert");
     }
 
     private void giveKartanaStats() {
-        this.pokemonHP = 256;
-        this.pokemonAttack = 398;
+        this.pokemonHP = this.pokemonCurrentHP = 256;
+        this.pokemonAttack = this.pokemonCurrentAttack = 398;
         this.pokemonDefense = 298;
-        this.pokemonSpecialAttack = 154;
-        this.pokemonSpecialDefense = 99;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 154;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 99;
         this.pokemonSpeed = 254;
         this.pokemonType[0] = "Grass";
         this.pokemonType[1] = "Steel";
-        this.move1 = "Leaf Blade";
-        this.move2 = "Smart Strike";
-        this.move3 = "Sacred Sword";
-        this.move4 = "Swords Dance";
+        this.pokemonMoves = new Moves("Kartana");
     }
 
     private void giveDragapultStats() {
-        this.pokemonHP = 317;
-        this.pokemonAttack = 276;
+        this.pokemonHP = this.pokemonCurrentHP = 317;
+        this.pokemonAttack = this.pokemonCurrentAttack = 276;
         this.pokemonDefense = 186;
-        this.pokemonSpecialAttack = 236;
-        this.pokemonSpecialDefense = 186;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 236;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 186;
         this.pokemonSpeed = 320;
         this.pokemonType[0] = "Ghost";
         this.pokemonType[1] = "Dragon";
-        this.move1 = "Shadow Ball";
-        this.move2 = "Dragon Pulse";
-        this.move3 = "Flamethrower";
-        this.move4 = "Hydro Pump";
+        this.pokemonMoves = new Moves("Dragapult");
     }
 
     private void giveBlisseyStats() {
-        this.pokemonHP = 651;
-        this.pokemonAttack = 56;
+        this.pokemonHP = this.pokemonCurrentHP = 651;
+        this.pokemonAttack = this.pokemonCurrentAttack = 56;
         this.pokemonDefense = 56;
-        this.pokemonSpecialAttack = 186;
-        this.pokemonSpecialDefense = 306;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 186;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 306;
         this.pokemonSpeed = 146;
         this.pokemonType[0] = "Normal";
         this.pokemonType[1] = "null";
-        this.move1 = "Seismic Toss";
-        this.move2 = "Soft Boiled";
-        this.move3 = "Thunderbolt";
-        this.move4 = "Thunder Wave";
+        this.pokemonMoves = new Moves("Blissey");
     }
 
     private void giveAerodactylStats() {
-        this.pokemonHP = 301;
-        this.pokemonAttack = 246;
+        this.pokemonHP = this.pokemonCurrentHP = 301;
+        this.pokemonAttack = this.pokemonCurrentAttack = 246;
         this.pokemonDefense = 166;
-        this.pokemonSpecialAttack = 156;
-        this.pokemonSpecialDefense = 186;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 156;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 186;
         this.pokemonSpeed = 296;
         this.pokemonType[0] = "Rock";
         this.pokemonType[1] = "Flying";
-        this.move1 = "Stone Edge";
-        this.move2 = "Wing Attack";
-        this.move3 = "Earthquake";
-        this.move4 = "Roost";
+        this.pokemonMoves = new Moves("Aerodactyl");
     }
 
     private void givePrimarinaStats() {
-        this.pokemonHP = 301;
+        this.pokemonHP = this.pokemonCurrentHP = 301;
         this.pokemonAttack = 184;
         this.pokemonDefense = 184;
-        this.pokemonSpecialAttack = 288;
-        this.pokemonSpecialDefense = 268;
+        this.pokemonSpecialAttack = this.pokemonCurrentSpecialAttack = 288;
+        this.pokemonSpecialDefense = this.pokemonCurrentSpecialDefense = 268;
         this.pokemonSpeed = 156;
         this.pokemonType[0] = "Water";
         this.pokemonType[1] = "Fairy";
-        this.move1 = "Moonblast";
-        this.move2 = "Hydro Pump";
-        this.move3 = "Energy Ball";
-        this.move4 = "Calm Mind";
+        this.pokemonMoves = new Moves("Primarina");
     }
 
 
@@ -213,8 +190,67 @@ public class Pokemon {
                      + "Special Defense: " + this.pokemonSpecialDefense + "\n"
                      + "Speed: " + this.pokemonSpeed + "\n"
                      + "Type: " + this.pokemonType[0] + ", " + this.pokemonType[1] + "\n"
-                     + "Moves: " + this.move1 + ", " + this.move2 + ", " + this.move3 + ", " + this.move4;
+                     + "Moves: " + this.pokemonMoves.getMoveName(0)
+                     + ", " + this.pokemonMoves.getMoveName(1)
+                     + ", " + this.pokemonMoves.getMoveName(2)
+                     + ", " + this.pokemonMoves.getMoveName(3);
         return facts;
+    }
+
+    public int getPokemonHP() {
+        return this.pokemonHP;
+    }
+
+    public int getPokemonCurrentHP() {
+        return this.pokemonCurrentHP;
+    }
+
+    public void setPokemonCurrentHP(int hp) {
+        this.pokemonCurrentHP = hp;
+    }
+
+    public void setPokemonCurrentAttack(int atk) {
+        this.pokemonCurrentAttack = atk;
+    }
+
+    public void setPokemonCurrentSpecialAttack(int spatk) {
+        this.pokemonCurrentSpecialAttack = spatk;
+    }
+
+    public void setPokemonCurrentSpecialDefense(int spdef) {
+        this.pokemonCurrentSpecialDefense = spdef;
+    }
+
+    public int getPokemonAttack() {
+        return this.pokemonAttack;
+    }
+
+    public int getPokemonDefense() {
+        return this.pokemonDefense;
+    }
+
+    public int getPokemonSpecialAttack() {
+        return this.pokemonSpecialAttack;
+    }
+
+    public int getPokemonSpecialDefense() {
+        return this.pokemonSpecialDefense;
+    }
+
+    public int getPokemonSpeed() {
+        return this.pokemonSpeed;
+    }
+
+    public int getPokemonCurrentAttack() {
+        return this.pokemonCurrentAttack;
+    }
+
+    public int getPokemonCurrentSpecialAttack() {
+        return this.pokemonCurrentSpecialAttack;
+    }
+
+    public int getPokemonCurrentSpecialDefense() {
+        return this.pokemonCurrentSpecialDefense;
     }
 
     //EFFECTS: gives the pokemons type
@@ -222,4 +258,8 @@ public class Pokemon {
         return this.pokemonType;                                //To verify the stats are correct, this is used to
     }                                                           //Figure out the type effectiveness, as well as STAB
                                                                 //Which will be explained in the Moves class
+
+    public Moves getPokemonMoves() {
+        return this.pokemonMoves;
+    }
 }

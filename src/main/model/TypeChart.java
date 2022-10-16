@@ -83,7 +83,7 @@ public class TypeChart {
             multiplier = multiplier * bugMove(pokemonType);
         } else if (moveType.equals("Ghost")) {
             multiplier = multiplier * ghostMove(pokemonType);
-        } else if (moveType.equals("Poison")) {
+        } else {
             multiplier = multiplier * poisonMove(pokemonType);
         }
         return multiplier;
