@@ -73,7 +73,7 @@ public class Moves {
             setupAerodactyl();
         } else {
             setupPrimarina();
-        } //test
+        }
     }
 
     private void setupVictini() {
@@ -213,11 +213,11 @@ public class Moves {
         movePower[2] = 90;
         moveAccuracy[2] = 100;
         moveProperties[2] = "Attack";
-        moveName[3] = "Thunder Wave";
-        moveType[3] = "Electric";
-        movePower[3] = 0;
+        moveName[3] = "Flamethrower";
+        moveType[3] = "Fire";
+        movePower[3] = 90;
         moveAccuracy[3] = 100;
-        moveProperties[3] = "Status";
+        moveProperties[3] = "Attack";
         moveDamageType[0] = moveDamageType[1] = moveDamageType[2] = moveDamageType[3] = "Special";
     }
 
@@ -251,9 +251,9 @@ public class Moves {
         movePower[0] = 150;
         moveAccuracy[0] = 80;
         moveProperties[0] = "Attack";
-        moveName[1] = "Wing Attack";
+        moveName[1] = "Dual Wingbeat";
         moveType[1] = "Flying";
-        movePower[1] = 90;
+        movePower[1] = 80;
         moveAccuracy[1] = 100;
         moveProperties[1] = "Attack";
         moveName[2] = "Earthquake";

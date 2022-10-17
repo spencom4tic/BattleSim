@@ -148,7 +148,7 @@ class PokemonTest {
                 + "Special Defense: " + 306 + "\n"
                 + "Speed: " + 146 + "\n"
                 + "Type: " + "Normal" + ", " + "null" + "\n"
-                + "Moves: " + "Seismic Toss"+ ", " + "Soft Boiled" + ", " + "Thunderbolt"+ ", " + "Thunder Wave";
+                + "Moves: " + "Seismic Toss"+ ", " + "Soft Boiled" + ", " + "Thunderbolt"+ ", " + "Flamethrower";
 
         assertEquals(facts, Blissey.getFacts());
     }
