@@ -38,3 +38,7 @@ how to make can make this project fun for me!
 * As a user, I want to be able to switch my pokemon if needed.
 * As a user, I want to see what my moves do.
 * As a user, I want to see the pokemon I am using and am against.
+
+### User Stories Phase 2
+* As a user, I want to be able to save my party if I have to leave mid battle.
+* As a user, I want to be able to load my party so I can start where I left off. 
