@@ -4,6 +4,7 @@ import model.Pokemon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -141,4 +142,75 @@ class JsonReaderTest {
         }
     }
 
+    @Test
+    void testForThisVerySpecificThing() throws FileNotFoundException {
+        JsonReader reader = new JsonReader("./data/testActivePokemon.json");
+        JsonWriter writer = new JsonWriter("./data/testActivePokemon.json");
+        Pokemon pokemon2 = new Pokemon("Pangoro");
+        pokemon2.setupPokemon();
+        pokemon2.setPokemonCurrentSpecialDefense(1);
+        writer.open();
+        writer.write(list2, list3, pokemon2, pokemon2);
+        writer.close();
+        try{
+            assertEquals(null, reader.readActivePokemon(list2));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+
+    }
+
+    @Test
+    void testForThisVerySpecificThing2() throws FileNotFoundException {
+        JsonReader reader = new JsonReader("./data/testActivePokemon.json");
+        JsonWriter writer = new JsonWriter("./data/testActivePokemon.json");
+        Pokemon pokemon2 = new Pokemon("Pangoro");
+        pokemon2.setupPokemon();
+        pokemon2.setPokemonCurrentSpecialAttack(1);
+        writer.open();
+        writer.write(list2, list3, pokemon2, pokemon2);
+        writer.close();
+        try{
+            assertEquals(null, reader.readActivePokemon(list2));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+
+    }
+
+    @Test
+    void testForThisVerySpecificThing3() throws FileNotFoundException {
+        JsonReader reader = new JsonReader("./data/testActivePokemon.json");
+        JsonWriter writer = new JsonWriter("./data/testActivePokemon.json");
+        Pokemon pokemon2 = new Pokemon("Pangoro");
+        pokemon2.setupPokemon();
+        pokemon2.setPokemonCurrentAttack(1);
+        writer.open();
+        writer.write(list2, list3, pokemon2, pokemon2);
+        writer.close();
+        try{
+            assertEquals(null, reader.readActivePokemon(list2));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+
+    }
+
+    @Test
+    void testForThisVerySpecificThing4() throws FileNotFoundException {
+        JsonReader reader = new JsonReader("./data/testActivePokemon.json");
+        JsonWriter writer = new JsonWriter("./data/testActivePokemon.json");
+        Pokemon pokemon2 = new Pokemon("Pangoro");
+        pokemon2.setupPokemon();
+        pokemon2.setPokemonCurrentHP(1);
+        writer.open();
+        writer.write(list2, list3, pokemon2, pokemon2);
+        writer.close();
+        try{
+            assertEquals(null, reader.readActivePokemon(list2));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+
+    }
 }
