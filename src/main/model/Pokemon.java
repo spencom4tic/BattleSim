@@ -197,6 +197,14 @@ public class Pokemon {
         return facts;
     }
 
+    public String getSaveFacts() {
+        String saveFacts = "Name: " + this.pokemonName + "\n"
+                         + "Current HP: " + this.pokemonCurrentHP + "\n"
+                         + "Current Attack: " + this.getPokemonCurrentAttack() + "\n"
+                         + "Current Special Attack: " + this.getPokemonCurrentSpecialAttack() + "\n"
+                         + "Current Special Defense: " + this.getPokemonCurrentSpecialDefense();
+        return saveFacts;
+    }
     public int getPokemonHP() {
         return this.pokemonHP;
     }

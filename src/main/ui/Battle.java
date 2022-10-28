@@ -2,7 +2,11 @@ package ui;
 
 import model.Pokemon;
 import model.TypeChart;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,6 +21,9 @@ public class Battle {
     //Opponent Active Pokemon - Changing
     //Opponent Party          - Static once set
 
+    JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private static final String JSON_STORE = "./data/pokemon.json";
     Random rand = new Random();
     Scanner userinput = new Scanner(System.in);
     private Pokemon activePokemon;                                    //Creates the pokemon that will be actice
@@ -40,20 +47,24 @@ public class Battle {
     // EFFECTS: runs the addPokemon application
     // EFFECTS: Starts the Battle
     public Battle() {
-        System.out.println("");
-        System.out.println("Welcome to the Pokemon Battle! Please choose 3 of the 9 listed pokemon! "
-                + "Repeats are allowed.");
-        for (int x = 0; x < acceptablePokemon.length; x++) {
-            System.out.print(acceptablePokemon[x] + ", ");
+        boolean check = checkLoad();
+        if (!check) {
+            System.out.println("");
+            System.out.println("Welcome to the Pokemon Battle! Please choose 3 of the 9 listed pokemon! "
+                    + "Repeats are allowed.");
+            for (int x = 0; x < acceptablePokemon.length; x++) {
+                System.out.print(acceptablePokemon[x] + ", ");
+            }
+            System.out.println("");
+            addPokemon();
+            makeEnemyTeam();
+            System.out.println("Press any key and return when you are ready to start!");
+            String dummy = userinput.next();                                   //Forces user to enter input to continue
+            startBattle();                                                     //Starts the battle
         }
-        System.out.println("");
-        addPokemon();
-        makeEnemyTeam();
-        System.out.println("Press any key and return when you are ready to start!");
-        String dummy = userinput.next();                                        //Forces user to enter input to continue
-        startBattle();                                                          //Starts the battle
         fight();
         endGame();
+
     }
 
     //MODIFIES: This
@@ -155,18 +166,60 @@ public class Battle {
                 + activePokemon.getPokemonDefense() + ", Special Attack: "
                 + activePokemon.getPokemonCurrentSpecialAttack() + ", Special Defense: "
                 + activePokemon.getPokemonCurrentSpecialDefense() + ", Speed: " + activePokemon.getPokemonSpeed());
-
+        askIfWeWantToSave();
         boolean switching = askIfWeWantToSwitch();
         if (doWeGoFirst && !switching) {
-            System.out.println("Here!");
             turnWhereWeGoFirst();
         } else {
             turnWhereOpponentGoesFirst(switching);
         }
     }
 
+    public void askIfWeWantToSave() {
+        System.out.println("Would you like to to save? 1 = Yes, and 2 = No!");
+        int answer = userinput.nextInt();
+        if (answer == 1) {
+            save();
+        }
+    }
+
+    public void save() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(listOfPokemon, enemyPokemon, activePokemon, opponentActivePokemon);
+            jsonWriter.close();
+            System.out.println("Saved");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file");
+        }
+    }
+
+    public boolean checkLoad() {
+        System.out.println("Would you like to to load your previous file? 1 = Yes, and 2 = No!");
+        int answer = userinput.nextInt();
+        if (answer == 1) {
+            try {
+                load();
+                System.out.println("Loaded from " + JSON_STORE);
+                return true;
+            } catch (IOException e) {
+                System.out.println("Unable to load game");
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public void load() throws IOException {
+        listOfPokemon = jsonReader.readOurPokemon();
+        enemyPokemon = jsonReader.readEnemyPokemon();
+        activePokemon = jsonReader.readActivePokemon(listOfPokemon);
+        opponentActivePokemon = jsonReader.readOpponentActivePokemon(enemyPokemon);
+    }
+
     public boolean askIfWeWantToSwitch() {
-        System.out.println("Would you like to to switch? Press 1 for yes, and 2 for no!");
+        System.out.println("Would you like to to switch? 1 = Yes, and 2 = No!");
         int answer = userinput.nextInt();
         if (answer == 1) {
             return true;
@@ -416,8 +469,11 @@ public class Battle {
         percent = ((double) 100) * percent;
         int intPercent = (int) percent;
         boolean healCheck = checkHeal(opponentActivePokemon);
-        boolean setupCheck = checkSetup(opponentActivePokemon);
-
+        boolean setupCheck = checkSetup(opponentActivePokemon)
+                          && (opponentActivePokemon.getPokemonCurrentAttack()
+                             > 1.5 * opponentActivePokemon.getPokemonAttack()
+                             || opponentActivePokemon.getPokemonCurrentSpecialAttack()
+                             > 1.3 * opponentActivePokemon.getPokemonSpecialAttack());
         if (intPercent < 33 && healCheck == true) {
             healOpponent(opponentActivePokemon);
         } else if (intPercent > 75 && setupCheck == true) {
@@ -448,6 +504,7 @@ public class Battle {
         }
         return false;
     }
+
 
     private void healOpponent(Pokemon pokemon) {
         if (pokemon.getName().equals("Blissey")) {
