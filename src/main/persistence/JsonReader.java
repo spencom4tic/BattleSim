@@ -1,4 +1,5 @@
 package persistence;
+//most of this code is credited to UBC's CPSC 210 class example code
 
 import model.Pokemon;
 import org.json.*;

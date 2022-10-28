@@ -1,0 +1,66 @@
+{
+    "List of Pokemon": {
+        "Our Pokemon": [
+            {
+                "Current Special Attack": 174,
+                "Current HP": 331,
+                "Current Attack": 284,
+                "Current Special Defense": 178,
+                "Name": "Pangoro"
+            },
+            {
+                "Current Special Attack": 286,
+                "Current HP": 321,
+                "Current Attack": 216,
+                "Current Special Defense": 216,
+                "Name": "Zapdos"
+            },
+            {
+                "Current Special Attack": 186,
+                "Current HP": 651,
+                "Current Attack": 56,
+                "Current Special Defense": 306,
+                "Name": "Blissey"
+            }
+        ],
+        "Opponent Pokemon": [
+            {
+                "Current Special Attack": 236,
+                "Current HP": 317,
+                "Current Attack": 276,
+                "Current Special Defense": 186,
+                "Name": "Dragapult"
+            },
+            {
+                "Current Special Attack": 156,
+                "Current HP": 301,
+                "Current Attack": 246,
+                "Current Special Defense": 186,
+                "Name": "Aerodactyl"
+            },
+            {
+                "Current Special Attack": 236,
+                "Current HP": 317,
+                "Current Attack": 276,
+                "Current Special Defense": 186,
+                "Name": "Dragapult"
+            }
+        ]
+    },
+    "Active Pokemon": {
+        "Opponent active pokemon": {
+            "Current Special Attack": 236,
+            "Current HP": 317,
+            "Current Attack": 276,
+            "Current Special Defense": 186,
+            "Name": "Dragapult"
+        },
+        "Our active pokemon": {
+            "Current Special Attack": 286,
+            "Current HP": 321,
+            "Current Attack": 216,
+            "Current Special Defense": 216,
+            "Name": "Zapdos"
+        }
+    }
+}
