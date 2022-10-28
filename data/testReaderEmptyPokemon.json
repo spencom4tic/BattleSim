@@ -1,0 +1,22 @@
+{
+  "List of Pokemon": {
+    "Our Pokemon": [],
+    "Opponent Pokemon": []
+  },
+  "Active Pokemon": {
+    "Opponent active pokemon": {
+      "Current Special Attack": 236,
+      "Current HP": 317,
+      "Current Attack": 276,
+      "Current Special Defense": 186,
+      "Name": "Dragapult"
+    },
+    "Our active pokemon": {
+      "Current Special Attack": 174,
+      "Current HP": 331,
+      "Current Attack": 284,
+      "Current Special Defense": 178,
+      "Name": "Pangoro"
+    }
+  }
+}

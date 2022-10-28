@@ -111,7 +111,7 @@ public class Battle {
     private void makeEnemyTeam() {            //Basically the same code as addPokemon but using a random
         int enemyTeamNumber = 0;              //number generator to generate enemy pokemon
         while (enemyTeamNumber < PARTY_NUMBER) {
-            int randomPokemon = rand.nextInt(8);
+            int randomPokemon = rand.nextInt(9);
             Pokemon opponentPokemon = new Pokemon(acceptablePokemon[randomPokemon]);
             setUpPokemon(opponentPokemon);
             enemyPokemon[enemyTeamNumber] = opponentPokemon;

@@ -205,6 +205,7 @@ public class Pokemon {
                          + "Current Special Defense: " + this.getPokemonCurrentSpecialDefense();
         return saveFacts;
     }
+
     public int getPokemonHP() {
         return this.pokemonHP;
     }
