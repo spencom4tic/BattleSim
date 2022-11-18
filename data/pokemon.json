@@ -2,65 +2,65 @@
     "List of Pokemon": {
         "Our Pokemon": [
             {
+                "Current Special Attack": 236,
+                "Current HP": 341,
+                "Current Attack": 236,
+                "Current Special Defense": 236,
+                "Name": "Victini"
+            },
+            {
                 "Current Special Attack": 174,
-                "Current HP": 189,
-                "Current Attack": 568,
+                "Current HP": 331,
+                "Current Attack": 284,
                 "Current Special Defense": 178,
                 "Name": "Pangoro"
             },
             {
-                "Current Special Attack": 286,
-                "Current HP": 321,
-                "Current Attack": 216,
-                "Current Special Defense": 216,
-                "Name": "Zapdos"
-            },
-            {
-                "Current Special Attack": 186,
-                "Current HP": 651,
-                "Current Attack": 56,
-                "Current Special Defense": 306,
-                "Name": "Blissey"
+                "Current Special Attack": 236,
+                "Current HP": 341,
+                "Current Attack": 236,
+                "Current Special Defense": 236,
+                "Name": "Victini"
             }
         ],
         "Opponent Pokemon": [
             {
                 "Current Special Attack": 236,
-                "Current HP": 317,
-                "Current Attack": 276,
-                "Current Special Defense": 186,
-                "Name": "Dragapult"
+                "Current HP": 341,
+                "Current Attack": 236,
+                "Current Special Defense": 236,
+                "Name": "Victini"
             },
             {
-                "Current Special Attack": 156,
+                "Current Special Attack": 288,
                 "Current HP": 301,
-                "Current Attack": 246,
-                "Current Special Defense": 186,
-                "Name": "Aerodactyl"
+                "Current Attack": 0,
+                "Current Special Defense": 268,
+                "Name": "Primarina"
             },
             {
-                "Current Special Attack": 236,
-                "Current HP": 317,
-                "Current Attack": 276,
-                "Current Special Defense": 186,
-                "Name": "Dragapult"
+                "Current Special Attack": 288,
+                "Current HP": 301,
+                "Current Attack": 0,
+                "Current Special Defense": 268,
+                "Name": "Primarina"
             }
         ]
     },
     "Active Pokemon": {
         "Opponent active pokemon": {
-            "Current Special Attack": 236,
-            "Current HP": 317,
-            "Current Attack": 276,
-            "Current Special Defense": 186,
-            "Name": "Dragapult"
+            "Current Special Attack": 288,
+            "Current HP": 301,
+            "Current Attack": 0,
+            "Current Special Defense": 268,
+            "Name": "Primarina"
         },
         "Our active pokemon": {
-            "Current Special Attack": 174,
-            "Current HP": 189,
-            "Current Attack": 568,
-            "Current Special Defense": 178,
-            "Name": "Pangoro"
+            "Current Special Attack": 236,
+            "Current HP": 341,
+            "Current Attack": 236,
+            "Current Special Defense": 236,
+            "Name": "Victini"
         }
     }
 }

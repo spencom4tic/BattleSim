@@ -1,19 +1,35 @@
 package ui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import model.Pokemon;
 import model.TypeChart;
+import model.exception.CantSaveException;
+import model.exception.TooManyPokemonAddedException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 
 //Battle Application
-public class Battle {
+class Battle extends JFrame {
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
+    private static final String FILE_DESCRIPTOR = "...file";
+    private static final String SCREEN_DESCRIPTOR = "...screen";
+    private JComboBox<String> printCombo;
+    private JDesktopPane desktop;
+    private JInternalFrame controlPanel;
+
 
     //Variables
     //Active Pokemon          - Changing
@@ -42,6 +58,32 @@ public class Battle {
             "Aerodactyl",
             "Primarina" };
 
+    private boolean canSave = false;
+    private boolean canSwitch = false;
+
+    Icon iconPrimarina = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Primarina.png");
+    Icon iconVictini = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Victini.png");
+    Icon iconBlissey = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Blissey.png");
+    Icon iconPangoro = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Pangoro.png");
+    Icon iconDragapult = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Dragapult.png");
+    Icon iconKartana = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Kartana.png");
+    Icon iconZapdos = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Zapdos.png");
+    Icon iconAerodactyl = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Aerodactyl.png");
+    Icon iconSwampert = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
+            + "project_z7w5c\\data\\pokemon sprites\\Swampert.png");
+
+    JPanel addPokemonButtonPanel = new JPanel();
+    JPanel ourPokemon = new JPanel();
+    int addedPokemon = 0;
+    String dummy;
 
     // EFFECTS: Welcomes player
     // EFFECTS: runs the addPokemon application
@@ -49,22 +91,365 @@ public class Battle {
     public Battle() {
         boolean check = checkLoad();
         if (!check) {
-            System.out.println("");
-            System.out.println("Welcome to the Pokemon Battle! Please choose 3 of the 9 listed pokemon! "
-                    + "Repeats are allowed.");
+            setupUI();
+            System.out.println("Press any key when you are have made your team!");
+            /*System.out.println("\nWelcome to the Pokemon Battle!
+             Please choose 3 of the 9 listed pokemon! Repeats are allowed.");
             for (int x = 0; x < acceptablePokemon.length; x++) {
                 System.out.print(acceptablePokemon[x] + ", ");
             }
-            System.out.println("");
-            addPokemon();
-            makeEnemyTeam();
-            System.out.println("Press any key and return when you are ready to start!");
-            String dummy = userinput.next();                                   //Forces user to enter input to continue
-            startBattle();                                                     //Starts the battle
+            addPokemon();*/
         }
+        while (listOfPokemon[2] == null) {
+
+            dummy = userinput.next();
+        }
+
+        for (Pokemon x : listOfPokemon) {
+            setUpPokemon(x);
+        }
+        controlPanel.remove(addPokemonButtonPanel);
+        makeEnemyTeam();
+        startBattle();
         fight();
         endGame();
 
+    }
+
+    private void setupUI() {
+        desktop = new JDesktopPane();
+        desktop.addMouseListener(new DesktopFocusAction());
+        controlPanel = new JInternalFrame("Control Panel",
+                false, false, false, false);
+        controlPanel.setLayout(new BorderLayout());
+        setContentPane(desktop);
+        setTitle("Spencer's Pokemon Battle Simulator");
+        setSize(WIDTH, HEIGHT);
+        addOurPokemon();
+        //addSaveLoad();
+        controlPanel.pack();
+        controlPanel.setVisible(true);
+        desktop.add(controlPanel);
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        centreOnScreen();
+        setVisible(true);
+
+    }
+
+
+    private class DesktopFocusAction extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            Battle.this.requestFocusInWindow();
+        }
+    }
+
+    private void centreOnScreen() {
+        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
+
+    }
+
+    private void addSaveLoad() {
+        JPanel saveButtonPanel = new JPanel();
+        saveButtonPanel.setLayout(new GridLayout(1, 3));
+        saveButtonPanel.add(new JButton(new SaveAction()));
+        saveButtonPanel.add(new JButton(new LoadAction()));
+        saveButtonPanel.add(createPrintCombo());
+
+        controlPanel.add(saveButtonPanel, BorderLayout.CENTER);
+    }
+
+    private class SaveAction extends AbstractAction {
+
+        SaveAction() {
+            super("Save the Game");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                save();
+            } catch (CantSaveException c) {
+                JOptionPane.showMessageDialog(null, c.getMessage(),
+                        "System Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private class LoadAction extends AbstractAction {
+
+        LoadAction() {
+            super("Load a previously stored game");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    private JComboBox<String> createPrintCombo() {
+        printCombo = new JComboBox<String>();
+        printCombo.addItem(FILE_DESCRIPTOR);
+        printCombo.addItem(SCREEN_DESCRIPTOR);
+        return printCombo;
+    }
+
+    private void addOurPokemon() {
+        JButton primarina = new JButton(iconPrimarina);
+        JButton pangoro = new JButton(iconPangoro);
+        JButton swampert = new JButton(iconSwampert);
+        JButton zapdos = new JButton(iconZapdos);
+        JButton kartana = new JButton(iconKartana);
+        JButton aerodactyl = new JButton(iconAerodactyl);
+        JButton blissey = new JButton(iconBlissey);
+        JButton dragapult = new JButton(iconDragapult);
+        JButton victini = new JButton(iconVictini);
+        primarina.addActionListener(new PrimarinaActionListener());
+        pangoro.addActionListener(new PangoroActionListener());
+        swampert.addActionListener(new SwampertActionListener());
+        zapdos.addActionListener(new ZapdosActionListener());
+        kartana.addActionListener(new KartanaActionListener());
+        aerodactyl.addActionListener(new AerodactylActionListener());
+        blissey.addActionListener(new BlisseyActionListener());
+        dragapult.addActionListener(new DragapultActionListener());
+        victini.addActionListener(new VictiniActionListener());
+        addOurPokemonPart2(primarina, pangoro, victini,
+                swampert, zapdos, kartana, aerodactyl, blissey, dragapult);
+    }
+
+    private void addOurPokemonPart2(JButton primarina, JButton pangoro, JButton victini, JButton swampert,
+                                    JButton zapdos, JButton kartana, JButton aerodactyl, JButton blissey,
+                                    JButton dragapult) {
+        JOptionPane.showMessageDialog(null, "Please choose 3 pokemon from the list");
+        JOptionPane.showMessageDialog(null, "Once you choose 3, please look at the console "
+                + "for the next steps");
+        JOptionPane.showMessageDialog(null, "You have to move the panel in order to see "
+                + "what pokemon you have chosen");
+        addPokemonButtonPanel.setLayout(new GridLayout(5, 3));
+        ourPokemon.setLayout(new GridLayout(3, 1));
+        addPokemonButtonPanel.add(primarina);
+        addPokemonButtonPanel.add(pangoro);
+        addPokemonButtonPanel.add(swampert);
+        addPokemonButtonPanel.add(kartana);
+        addPokemonButtonPanel.add(zapdos);
+        addPokemonButtonPanel.add(blissey);
+        addPokemonButtonPanel.add(dragapult);
+        addPokemonButtonPanel.add(aerodactyl);
+        addPokemonButtonPanel.add(victini);
+        addPokemonButtonPanel.add(new JButton("Your"));
+        addPokemonButtonPanel.add(new JButton("Team"));
+        addPokemonButtonPanel.add(new JButton("Below"));
+        controlPanel.add(addPokemonButtonPanel, BorderLayout.WEST);
+        controlPanel.add(ourPokemon, BorderLayout.SOUTH);
+
+    }
+
+    private class PrimarinaActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Primarina");
+                JButton primarinaActivePokemon = new JButton(iconPrimarina);
+                primarinaActivePokemon.addActionListener(new PrimarinaActionListener());
+                addPokemonButtonPanel.add(primarinaActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Primarina")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class PangoroActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Pangoro");
+                JButton pangoroActivePokemon = new JButton(iconPangoro);
+                pangoroActivePokemon.addActionListener(new PangoroActionListener());
+                addPokemonButtonPanel.add(pangoroActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Pangoro")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class SwampertActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Swampert");
+                JButton swampertActivePokemon = new JButton(iconSwampert);
+                swampertActivePokemon.addActionListener(new SwampertActionListener());
+                addPokemonButtonPanel.add(swampertActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Swampert")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class ZapdosActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Zapdos");
+                JButton zapdosActivePokemon = new JButton(iconZapdos);
+                zapdosActivePokemon.addActionListener(new ZapdosActionListener());
+                addPokemonButtonPanel.add(zapdosActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Zapdos")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class KartanaActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Kartana");
+                JButton kartanaActivePokemon = new JButton(iconKartana);
+                kartanaActivePokemon.addActionListener(new KartanaActionListener());
+                addPokemonButtonPanel.add(kartanaActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Kartana")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class AerodactylActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Aerodactyl");
+                JButton aerodactylActivePokemon = new JButton(iconAerodactyl);
+                aerodactylActivePokemon.addActionListener(new AerodactylActionListener());
+                addPokemonButtonPanel.add(aerodactylActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Aerodactyl")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class BlisseyActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Blissey");
+                JButton blisseyActivePokemon = new JButton(iconBlissey);
+                blisseyActivePokemon.addActionListener(new BlisseyActionListener());
+                addPokemonButtonPanel.add(blisseyActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Blissey")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
+    }
+
+    private class DragapultActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                if (addedPokemon < PARTY_NUMBER) {
+                    listOfPokemon[addedPokemon] = new Pokemon("Dragapult");
+                    JButton dragapultActivePokemon = new JButton(iconDragapult);
+                    dragapultActivePokemon.addActionListener(new DragapultActionListener());
+                    addPokemonButtonPanel.add(dragapultActivePokemon);
+                    addedPokemon++;
+                } else if (activePokemon == null) {
+                    for (Pokemon p : listOfPokemon) {
+                        if (p.getName().equals("Dragapult")) {
+                            activePokemon = p;
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                            + "and one active pokemon!");
+                }
+            }
+        }
+    }
+
+    private class VictiniActionListener extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (addedPokemon < PARTY_NUMBER) {
+                listOfPokemon[addedPokemon] = new Pokemon("Victini");
+                JButton victiniActivePokemon = new JButton(iconVictini);
+                victiniActivePokemon.addActionListener(new VictiniActionListener());
+                addPokemonButtonPanel.add(victiniActivePokemon);
+                addedPokemon++;
+            } else if (activePokemon == null) {
+                for (Pokemon p : listOfPokemon) {
+                    if (p.getName().equals("Victini")) {
+                        activePokemon = p;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You can only add 3 pokemon to the team"
+                        + "and one active pokemon!");
+            }
+        }
     }
 
     //MODIFIES: This
@@ -133,13 +518,21 @@ public class Battle {
             System.out.print(x + 1 + ". " + enemyPokemon[x].getName() + ", ");
         }
         System.out.println("\n");
-        System.out.println("Please choose your starting pokemon by their corresponding number.");
+        setupStartBattleUI();
+        //System.out.println("Please choose your starting pokemon by their corresponding number.");
                                              //Everything up to here is just console printing to make the UI look pretty
-        this.activePokemon = listOfPokemon[userinput.nextInt() - 1];              //Sets our active pokemon
+        //this.activePokemon = listOfPokemon[userinput.nextInt() - 1];              //Sets our active pokemon
         Random rand = new Random();
         this.opponentActivePokemon = enemyPokemon[rand.nextInt(3)];        //Sets opponents pokemon
     }
 
+
+    public void setupStartBattleUI() {
+
+        while (activePokemon == null) {
+
+        }
+    }
 
     //EFFECTS: makes the fight active
     private void fight() {
@@ -151,6 +544,7 @@ public class Battle {
     //MODIFIES: active pokemon
     //EFFECTS: plays a classic turn of pokemon
     private void doATurn() {
+        canSave = true;
         boolean doWeGoFirst = doWeGoFirst();
         System.out.println("\n\n\nStart of turn!");
         System.out.println("Opponents pokemon: " + opponentActivePokemon.getName()
@@ -179,19 +573,28 @@ public class Battle {
         System.out.println("Would you like to to save? 1 = Yes, and 2 = No!");
         int answer = userinput.nextInt();
         if (answer == 1) {
-            save();
+            try {
+                save();
+            } catch (CantSaveException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    public void save() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(listOfPokemon, enemyPokemon, activePokemon, opponentActivePokemon);
-            jsonWriter.close();
-            System.out.println("Saved");
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file");
+    public void save() throws CantSaveException {
+        if (canSave) {
+            try {
+                jsonWriter.open();
+                jsonWriter.write(listOfPokemon, enemyPokemon, activePokemon, opponentActivePokemon);
+                jsonWriter.close();
+                System.out.println("Saved");
+            } catch (FileNotFoundException e) {
+                System.out.println("Unable to write to file");
+            }
+        } else {
+            throw new CantSaveException("Cannot save at this moment!");
         }
+
     }
 
     public boolean checkLoad() {
@@ -252,18 +655,22 @@ public class Battle {
         } else if (enemyPokemon.length > 0) {
             doOpponentTurn();
             if (checkFainted(activePokemon, listOfPokemon) && listOfPokemon.length > 0) {
+                canSwitch = true;
                 switchYourPokemon();
             }
         }
+        canSave = true;
     }
 
     //TODO
     private void turnWhereOpponentGoesFirst(boolean switching) {
         if (switching) {
+            canSwitch = true;
             switchYourPokemon();
         }
         doOpponentTurn();
         if (checkFainted(activePokemon, listOfPokemon) && listOfPokemon.length > 0) {
+            canSwitch = true;
             switchYourPokemon();
         } else if (listOfPokemon.length > 0) {
             if (!switching) {
@@ -273,6 +680,7 @@ public class Battle {
                 switchOpponentPokemon();
             }
         }
+        canSave = true;
     }
 
     //EFFECTS: Does our turn of pokemon
@@ -300,6 +708,7 @@ public class Battle {
     //MODIFIES: Our active pokemon
     //EFFECTS: switch pokemon
     private void switchYourPokemon() {
+        canSave = false;
         System.out.println("Please enter what pokemon you would like to switch to!");
         for (int x = 0; x < listOfPokemon.length; x++) {
             if (!listOfPokemon[x].equals(activePokemon)) {               //creates list of possible pokemon to switch to
@@ -311,6 +720,7 @@ public class Battle {
         activePokemon.setPokemonCurrentSpecialDefense(activePokemon.getPokemonSpecialDefense());
         activePokemon = listOfPokemon[userinput.nextInt() - 1];   //TODOOOOOOOO               //Switches pokemon
         System.out.println(activePokemon.getName());
+        canSwitch = false;
     }
 
     //MODIFIES: one of the active pokemon
