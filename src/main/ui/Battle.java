@@ -60,6 +60,7 @@ class Battle extends JFrame {
 
     private boolean canSave = false;
     private boolean canSwitch = false;
+    private boolean canLoad = true;
 
     Icon iconPrimarina = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
             + "project_z7w5c\\data\\pokemon sprites\\Primarina.png");
@@ -89,22 +90,20 @@ class Battle extends JFrame {
     // EFFECTS: runs the addPokemon application
     // EFFECTS: Starts the Battle
     public Battle() {
-        boolean check = checkLoad();
-        if (!check) {
-            setupUI();
-            System.out.println("Press any key when you are have made your team!");
-            /*System.out.println("\nWelcome to the Pokemon Battle!
-             Please choose 3 of the 9 listed pokemon! Repeats are allowed.");
-            for (int x = 0; x < acceptablePokemon.length; x++) {
-                System.out.print(acceptablePokemon[x] + ", ");
-            }
-            addPokemon();*/
+        //boolean check = checkLoad();
+        setupUI();
+        System.out.println("Press any key when you are have made your team!");
+        /*System.out.println("\nWelcome to the Pokemon Battle!
+         Please choose 3 of the 9 listed pokemon! Repeats are allowed.");
+        for (int x = 0; x < acceptablePokemon.length; x++) {
+            System.out.print(acceptablePokemon[x] + ", ");
         }
+        addPokemon();*/
         while (listOfPokemon[2] == null) {
 
             dummy = userinput.next();
         }
-
+        canLoad = false;
         for (Pokemon x : listOfPokemon) {
             setUpPokemon(x);
         }
@@ -126,7 +125,7 @@ class Battle extends JFrame {
         setTitle("Spencer's Pokemon Battle Simulator");
         setSize(WIDTH, HEIGHT);
         addOurPokemon();
-        //addSaveLoad();
+        addSaveLoad();
         controlPanel.pack();
         controlPanel.setVisible(true);
         desktop.add(controlPanel);
@@ -188,7 +187,16 @@ class Battle extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                load();
+                if (canLoad) {
+                    load();
+                    JOptionPane.showMessageDialog(null, "Please look at the console for further"
+                            + " instructions");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please restart the console in order to"
+                            + " load");
+                }
+
+
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
