@@ -42,3 +42,17 @@ how to make can make this project fun for me!
 ### User Stories Phase 2
 * As a user, I want to be able to save my party if I have to leave mid battle.
 * As a user, I want to be able to load my party so I can start where I left off. 
+
+### Instructions for Grader phase 3
+* You can generate your first required event of adding
+pokemon to your list of pokemon by clicking on 3 of the icons
+that appear on the screen if you choose not to load previously existing game
+* You can generate the second required event of setting your active pokemon.
+  * Once you have chosen your team, if you try to move the panel by clicking
+  on the top of the panel, and moving it, it will update with your selected
+  pokemon. Once this updates, you can choose one of your 3 pokemon to lead off
+  with and start the battle. Once you enter a key an click enter on the console,
+  the game will start with your chosen pokemon. 
+* The visual component of the code will appear automatically and come with instructions
+* You can save the state of the application by *will do in a sec*
+* You can load the state of the application by *will do in a sec*
