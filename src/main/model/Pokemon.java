@@ -35,6 +35,7 @@ public class Pokemon {
     //REQUIRES: A valid pokemon name
     public Pokemon(String name) {
         this.pokemonName = name;
+        EventLog.getInstance().logEvent(new Event("Created a pokemon with the name " + name));
     }       //Constructs the pokemon
 
 
@@ -59,6 +60,7 @@ public class Pokemon {
         } else {                                                   //Primarina is the only option here as we have
             givePrimarinaStats();                                  //REQUIRED only valid pokemon in an above method
         }                                                          //Also git code coverage wants this to be else
+        EventLog.getInstance().logEvent(new Event("Giving stats and moves to " + this.pokemonName));
                                                                    //Instead of else if
     }
 
@@ -270,5 +272,22 @@ public class Pokemon {
 
     public Moves getPokemonMoves() {
         return this.pokemonMoves;
+    }
+
+
+    public void logActivePokemonSet() {
+        EventLog.getInstance().logEvent(new Event("Set " + this.getName() + " as the active pokemon"));
+    }
+
+    public void logPokemonSwitching() {
+        EventLog.getInstance().logEvent(new Event("Switched to " + this.getName() + " as the active pokemon"));
+    }
+
+    public void logSavingPokemon() {
+        EventLog.getInstance().logEvent(new Event("Saved the game"));
+    }
+
+    public void logLoadingPokemon() {
+        EventLog.getInstance().logEvent(new Event("Loaded the game"));
     }
 }

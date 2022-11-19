@@ -292,4 +292,8 @@ public class Moves {
         moveProperties[3] = "Calm Mind";
         moveDamageType[0] = moveDamageType[1] = moveDamageType[2] = moveDamageType[3] = "Special";
     }
+
+    public void logDoingAMove(String s) {
+        EventLog.getInstance().logEvent(new Event("User went for the move " + s));
+    }
 }

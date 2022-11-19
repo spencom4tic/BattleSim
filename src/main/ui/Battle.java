@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import model.Event;
+import model.EventLog;
 import model.Pokemon;
 import model.TypeChart;
 import model.exception.CantSaveException;
@@ -14,11 +17,11 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Random;
+import java.util.*;
 
 //Battle Application
 class Battle extends JFrame {
@@ -60,6 +63,7 @@ class Battle extends JFrame {
 
     private boolean canSave = false;
     private boolean canSwitch = false;
+    private boolean canLoad = true;
 
     Icon iconPrimarina = new ImageIcon("C:\\Users\\spenc\\IdeaProjects\\"
             + "project_z7w5c\\data\\pokemon sprites\\Primarina.png");
@@ -89,22 +93,20 @@ class Battle extends JFrame {
     // EFFECTS: runs the addPokemon application
     // EFFECTS: Starts the Battle
     public Battle() {
-        boolean check = checkLoad();
-        if (!check) {
-            setupUI();
-            System.out.println("Press any key when you are have made your team!");
-            /*System.out.println("\nWelcome to the Pokemon Battle!
-             Please choose 3 of the 9 listed pokemon! Repeats are allowed.");
-            for (int x = 0; x < acceptablePokemon.length; x++) {
-                System.out.print(acceptablePokemon[x] + ", ");
-            }
-            addPokemon();*/
+        //boolean check = checkLoad();
+        setupUI();
+        System.out.println("Press any key when you are have made your team!");
+        /*System.out.println("\nWelcome to the Pokemon Battle!
+         Please choose 3 of the 9 listed pokemon! Repeats are allowed.");
+        for (int x = 0; x < acceptablePokemon.length; x++) {
+            System.out.print(acceptablePokemon[x] + ", ");
         }
+        addPokemon();*/
         while (listOfPokemon[2] == null) {
 
             dummy = userinput.next();
         }
-
+        canLoad = false;
         for (Pokemon x : listOfPokemon) {
             setUpPokemon(x);
         }
@@ -119,21 +121,27 @@ class Battle extends JFrame {
     private void setupUI() {
         desktop = new JDesktopPane();
         desktop.addMouseListener(new DesktopFocusAction());
-        controlPanel = new JInternalFrame("Control Panel",
-                false, false, false, false);
+        controlPanel = new JInternalFrame("Control Panel", false, false, false, false);
         controlPanel.setLayout(new BorderLayout());
         setContentPane(desktop);
         setTitle("Spencer's Pokemon Battle Simulator");
         setSize(WIDTH, HEIGHT);
         addOurPokemon();
-        //addSaveLoad();
+        addSaveLoad();
         controlPanel.pack();
         controlPanel.setVisible(true);
         desktop.add(controlPanel);
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        centreOnScreen();
         setVisible(true);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.getDescription());
+                }
+                System.exit(0);
+            }
+        });
 
     }
 
@@ -188,7 +196,16 @@ class Battle extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                load();
+                if (canLoad) {
+                    load();
+                    JOptionPane.showMessageDialog(null, "Please look at the console for further"
+                            + " instructions");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please restart the console in order to"
+                            + " load");
+                }
+
+
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -265,6 +282,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Primarina")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -287,6 +305,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Pangoro")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -309,6 +328,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Swampert")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -331,6 +351,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Zapdos")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -353,6 +374,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Kartana")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -375,6 +397,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Aerodactyl")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -397,6 +420,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Blissey")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -420,6 +444,7 @@ class Battle extends JFrame {
                     for (Pokemon p : listOfPokemon) {
                         if (p.getName().equals("Dragapult")) {
                             activePokemon = p;
+                            p.logActivePokemonSet();
                         }
                     }
                 } else {
@@ -443,6 +468,7 @@ class Battle extends JFrame {
                 for (Pokemon p : listOfPokemon) {
                     if (p.getName().equals("Victini")) {
                         activePokemon = p;
+                        p.logActivePokemonSet();
                     }
                 }
             } else {
@@ -588,6 +614,8 @@ class Battle extends JFrame {
                 jsonWriter.write(listOfPokemon, enemyPokemon, activePokemon, opponentActivePokemon);
                 jsonWriter.close();
                 System.out.println("Saved");
+                activePokemon.logSavingPokemon();
+
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to write to file");
             }
@@ -619,6 +647,7 @@ class Battle extends JFrame {
         enemyPokemon = jsonReader.readEnemyPokemon();
         activePokemon = jsonReader.readActivePokemon(listOfPokemon);
         opponentActivePokemon = jsonReader.readOpponentActivePokemon(enemyPokemon);
+        activePokemon.logLoadingPokemon();
     }
 
     public boolean askIfWeWantToSwitch() {
@@ -692,6 +721,7 @@ class Battle extends JFrame {
                        +   "   3: " + activePokemon.getPokemonMoves().getMoveName(2)
                        +   "   4: " + activePokemon.getPokemonMoves().getMoveName(3));
         int chosenMove = userinput.nextInt() - 1;
+        activePokemon.getPokemonMoves().logDoingAMove(activePokemon.getPokemonMoves().getMoveName(chosenMove));
         if (activePokemon.getPokemonMoves().getMoveProperties(chosenMove).equals("Attack")) {
             doDamage(activePokemon, opponentActivePokemon, chosenMove);
         } else if (activePokemon.getPokemonMoves().getMoveProperties(chosenMove).equals("Heal")) {
@@ -720,6 +750,7 @@ class Battle extends JFrame {
         activePokemon.setPokemonCurrentSpecialDefense(activePokemon.getPokemonSpecialDefense());
         activePokemon = listOfPokemon[userinput.nextInt() - 1];   //TODOOOOOOOO               //Switches pokemon
         System.out.println(activePokemon.getName());
+        activePokemon.logPokemonSwitching();
         canSwitch = false;
     }
 
@@ -988,4 +1019,10 @@ class Battle extends JFrame {
             System.out.println("You have lost! Thanks for playing!");
         }
     }
+
+    public void quit() {
+
+    }
+
 }
+

@@ -56,3 +56,29 @@ that appear on the screen if you choose not to load previously existing game
 * The visual component of the code will appear automatically and come with instructions
 * You can save the state of the application by *will do in a sec*
 * You can load the state of the application by *will do in a sec*
+
+### Phase 4 task 2
+* Created a pokemon with the name Zapdos 
+* Created a pokemon with the name Victini
+* Created a pokemon with the name Aerodactyl
+* Set Aerodactyl as the active pokemon
+* Giving stats and moves to Zapdos
+* Giving stats and moves to Victini
+* Giving stats and moves to Aerodactyl
+* Created a pokemon with the name Pangoro
+* Giving stats and moves to Pangoro
+* Created a pokemon with the name Victini
+* Giving stats and moves to Victini
+* Created a pokemon with the name Swampert
+* Giving stats and moves to Swampert
+* Saved the game
+* User went for the move Stone Edge
+* Saved the game
+
+###Phase 4 task 3
+
+My code is a complete mess!! I like barely have any proper models,
+I have 1000 lines of code in the main code which is definitely a problem
+because I should be putting the UI stuff in the model, as well as the Logging stuff
+neither of which I did. Since there's so many methods in Battle, the UML diagram
+is kinda hard to properly draw. 
