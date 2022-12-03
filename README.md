@@ -81,4 +81,4 @@ My code is a complete mess!! I like barely have any proper models,
 I have 1000 lines of code in the main code which is definitely a problem
 because I should be putting the UI stuff in the model, as well as the Logging stuff
 neither of which I did. Since there's so many methods in Battle, the UML diagram
-is kinda hard to properly draw. 
+is kinda hard to properly draw.  
